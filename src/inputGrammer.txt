@@ -1,7 +1,8 @@
-4
+5
 S
 baaba
 S->AB|BC
 A->BA|a
 B->CC|b
-C->AB|a
+C->AB
+C->a

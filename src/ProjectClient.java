@@ -91,11 +91,11 @@ public class ProjectClient {
 			if(grammar.containsKey(lhs))
 			{
 				String old = grammar.get(lhs);
-				grammar.put(lhs, old +"," + rhs);
+				grammar.put(lhs.trim(), old.trim() +"," + rhs.trim());
 			}
 			else
 			{
-				grammar.put(lhs, rhs);
+				grammar.put(lhs.trim(), rhs.trim());
 		
 			}
 		}
@@ -122,6 +122,7 @@ public class ProjectClient {
 				{
 					String pr = generate_combinations(matrix[j-k][l], matrix[l+1][j], grammar);
 					r = concat_string(r, pr);
+					//r = test_concat(r, pr);
 				}
 				matrix[j-k][j] = r;
 			}
@@ -255,6 +256,17 @@ public class ProjectClient {
 		// TODO Auto-generated method stub
 		if(substring.length() == 1 && substring.charAt(0) >= 'A' && substring.charAt(0) <= 'Z')
 			return true;
+		/*if(substring.length() > 1)
+		{
+			int count = 0;
+			for(int i = 0; i < substring.length(); ++i)
+			{
+				if(substring.charAt(i) == ' ')
+					count++;
+			}
+			if(count <= 1)
+				return true;
+		}*/
 		return false;	
 	}
 	
@@ -275,7 +287,38 @@ public class ProjectClient {
 		if(substring.length() == 2 && substring.charAt(0) >= 'A' && substring.charAt(0) <= 'Z' && 
 				substring.charAt(1) >= 'A' && substring.charAt(1) <= 'Z')
 			return true;
+		/*if(substring.length() > 2)
+		{
+			int count = 0;
+			for(int i = 0; i < substring.length(); ++i)
+			{
+				if(substring.charAt(i) == ' ')
+					count++;
+			}
+			if(count <= 3)
+				return true;
+		}*/
 		return false;
 	}
 
+
+	
+	
+	/*private static String test_concat(String x, String y) 
+	{
+		// TODO Auto-generated method stub
+		String[] temp_str = x.split(",");
+		boolean doesExist = false;
+		for(int i = 0; i < temp_str.length; ++i)
+		{
+			if(temp_str[i].equalsIgnoreCase(y))
+				doesExist = true;
+		}
+		if(doesExist)
+			return x;
+		else
+			return x + "," + y; 
+	}*/
+	
+	
 }
