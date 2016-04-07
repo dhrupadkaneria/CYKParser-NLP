@@ -71,7 +71,6 @@ public class ProjectClient {
 						rhsFlag = false;
 						if(!rhsFlag)
 						{
-							//System.out.println("Test: " + newRHS[j]);
 							rhsFlag = checkRHS(newRHS[j]);
 							if(rhsFlag == false)
 							{
@@ -100,30 +99,35 @@ public class ProjectClient {
 		
 			}
 		}
-		matrix = new String[str.length()][str.length()];
+		//System.out.println("Grammar: " + grammar);
+		
+		String[] checkString = str.split(" ");
+		int strLength = checkString.length;
+		matrix = new String[strLength][strLength];
 		
 		/*
 		 * The below for loop will fill the diagonal elements in the matrix
 		 */
-		for(int i = 0; i < str.length(); ++i)
+		for(int i = 0; i < strLength; ++i)
 		{
-			matrix[i][i] = search_prod(str.charAt(i) + "", grammar);
+			matrix[i][i] = search_prod( checkString[i], grammar);
 		}
+		
+		
 		
 		/*
 		 * This loop is used to populate all the entries above the diagonal
 		 * The top most cell to the right will tell us if the string is generated or no
 		 */
-		for(int k = 1; k < str.length(); ++k)
+		for(int k = 1; k < strLength; ++k)
 		{
-			for(int j = k; j < str.length(); ++j)
+			for(int j = k; j < strLength; ++j)
 			{
 				r = "";
 				for(int l = j-k; l < j; ++l)
 				{
 					String pr = generate_combinations(matrix[j-k][l], matrix[l+1][j], grammar);
 					r = concat_string(r, pr);
-					//r = test_concat(r, pr);
 				}
 				matrix[j-k][j] = r;
 			}
@@ -134,9 +138,9 @@ public class ProjectClient {
 		 * This section is used to display the matrix in the required format
 		 */
 		System.out.println("\nFinal Matrix: ");
-		for(int i = 0; i < str.length(); ++i)
+		for(int i = 0; i < strLength; ++i)
 		{
-			for(int j = 0; j < str.length(); ++j)
+			for(int j = 0; j < strLength; ++j)
 			{
 				if(j < i)
 				{
@@ -164,7 +168,7 @@ public class ProjectClient {
 		 * generated from the given grammar or no.
 		 * Depending on the outcome, corresponding message is displayed.
 		 */
-		if(matrix[0][str.length()-1].indexOf(start) == -1)
+		if(matrix[0][strLength-1].indexOf(start) == -1)
 		{
 			System.out.println("\"" + str + "\" cannot be generated with the given grammar");
 		}
@@ -182,14 +186,14 @@ public class ProjectClient {
 	private static String generate_combinations(String x, String y, HashMap<String, String> grammar) 
 	{
 		// TODO Auto-generated method stub
-		String pri = x;
-		String re = "";
-		for(int i = 0; i < x.length(); ++i)
+		String pri = "", re = "";
+		String[] newX = x.split(",");
+		String[] newY = y.split(",");
+		for(int i = 0; i < newX.length; ++i)
 		{
-			for(int j = 0; j < y.length(); ++j)
+			for(int j = 0; j < newY.length; ++j)
 			{
-				pri = "";
-				pri = pri + x.charAt(i) + y.charAt(j);
+				pri = newX[i] + " " +newY[j];
 				re = re + search_prod(pri, grammar);
 			}
 		}
@@ -233,21 +237,7 @@ public class ProjectClient {
 	 */
 	private static String concat_string(String x, String y) 
 	{
-		// TODO Auto-generated method stub
-		/*String newString = x;
-		for(int i = 0; i < y.length(); ++i)
-		{
-			if(newString.indexOf(y.charAt(i)) == -1)
-			{
-				if(newString != "")
-					newString += y.charAt(i);
-				else
-					newString = newString + "," + y.charAt(i);
-			}
-		}
-		return newString;*/
-		
-		
+		// TODO Auto-generated method stub		
 		String[] temp_str = x.split(",");
 		boolean doesExist = false;
 		for(int i = 0; i < temp_str.length; ++i)
@@ -259,6 +249,8 @@ public class ProjectClient {
 			return x;
 		else if(x.equals(""))
 			return y;
+		else if(y.equals(""))
+			return x;
 		else
 			return x + "," + y;
 	}
@@ -275,7 +267,7 @@ public class ProjectClient {
 		// TODO Auto-generated method stub
 		if(substring.length() == 1 && substring.charAt(0) >= 'A' && substring.charAt(0) <= 'Z')
 			return true;
-		/*if(substring.length() > 1)
+		if(substring.length() > 1)
 		{
 			int count = 0;
 			for(int i = 0; i < substring.length(); ++i)
@@ -285,7 +277,7 @@ public class ProjectClient {
 			}
 			if(count <= 1)
 				return true;
-		}*/
+		}
 		return false;	
 	}
 	
@@ -306,7 +298,7 @@ public class ProjectClient {
 		if(substring.length() == 2 && substring.charAt(0) >= 'A' && substring.charAt(0) <= 'Z' && 
 				substring.charAt(1) >= 'A' && substring.charAt(1) <= 'Z')
 			return true;
-		/*if(substring.length() > 2)
+		if(substring.length() > 2)
 		{
 			int count = 0;
 			for(int i = 0; i < substring.length(); ++i)
@@ -314,9 +306,9 @@ public class ProjectClient {
 				if(substring.charAt(i) == ' ')
 					count++;
 			}
-			if(count <= 3)
+			if(count <= 1)
 				return true;
-		}*/
+		}
 		return false;
 	}
 }

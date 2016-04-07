@@ -1,8 +1,10 @@
-5
+7
 S
-baaba
-S->AB|BC
-A->BA|a
-B->CC|b
-C->AB
-C->a
+John ate the cat
+S->NP VP
+VP->V NP
+NP->John
+NP->ART N
+V->ate
+ART->the
+N->cat
