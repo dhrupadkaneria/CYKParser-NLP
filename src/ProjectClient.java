@@ -91,6 +91,7 @@ public class ProjectClient {
 			if(grammar.containsKey(lhs))
 			{
 				String old = grammar.get(lhs);
+				grammar.remove(lhs);
 				grammar.put(lhs.trim(), old.trim() +"," + rhs.trim());
 			}
 			else
