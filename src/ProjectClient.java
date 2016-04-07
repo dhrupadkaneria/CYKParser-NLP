@@ -166,11 +166,11 @@ public class ProjectClient {
 		 */
 		if(matrix[0][str.length()-1].indexOf(start) == -1)
 		{
-			System.out.println(str + " cannot be generated with the given grammar");
+			System.out.println("\"" + str + "\" cannot be generated with the given grammar");
 		}
 		else
 		{
-			System.out.println(str + " can be generated with the given grammar");
+			System.out.println("\"" + str + "\" can be generated with the given grammar");
 		}
 	}
 
@@ -234,15 +234,33 @@ public class ProjectClient {
 	private static String concat_string(String x, String y) 
 	{
 		// TODO Auto-generated method stub
-		String newString = x;
+		/*String newString = x;
 		for(int i = 0; i < y.length(); ++i)
 		{
 			if(newString.indexOf(y.charAt(i)) == -1)
 			{
-				newString += y.charAt(i);
+				if(newString != "")
+					newString += y.charAt(i);
+				else
+					newString = newString + "," + y.charAt(i);
 			}
 		}
-		return newString;
+		return newString;*/
+		
+		
+		String[] temp_str = x.split(",");
+		boolean doesExist = false;
+		for(int i = 0; i < temp_str.length; ++i)
+		{
+			if(temp_str[i].equalsIgnoreCase(y))
+				doesExist = true;
+		}
+		if(doesExist)
+			return x;
+		else if(x.equals(""))
+			return y;
+		else
+			return x + "," + y;
 	}
 
 	
@@ -301,25 +319,4 @@ public class ProjectClient {
 		}*/
 		return false;
 	}
-
-
-	
-	
-	/*private static String test_concat(String x, String y) 
-	{
-		// TODO Auto-generated method stub
-		String[] temp_str = x.split(",");
-		boolean doesExist = false;
-		for(int i = 0; i < temp_str.length; ++i)
-		{
-			if(temp_str[i].equalsIgnoreCase(y))
-				doesExist = true;
-		}
-		if(doesExist)
-			return x;
-		else
-			return x + "," + y; 
-	}*/
-	
-	
 }
