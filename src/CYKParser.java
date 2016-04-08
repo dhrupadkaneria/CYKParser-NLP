@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Set;
 
-public class ProjectClient {
+public class CYKParser {
 
 	@SuppressWarnings({ "resource" })
 	public static void main(String[] args) throws Exception {
@@ -19,7 +19,7 @@ public class ProjectClient {
 		int pointer = -1;
 		String[][] matrix = null;
 		HashMap<String, String> grammar = new HashMap<String, String>();
-		FileInputStream fis = new FileInputStream("./src/inputGrammer.txt");
+		FileInputStream fis = new FileInputStream("./src/inputGrammar.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
         int num_prod = Integer.parseInt(reader.readLine());
         System.out.println("Number of productions: " + num_prod);
@@ -28,6 +28,7 @@ public class ProjectClient {
 		System.out.println("Start variable: " + start);
 		String str = reader.readLine();
 		System.out.println("String to be searched: " + str);
+		System.out.println("\nProduction rules:");
 		
 		/*
 		 * In this loop, we ask the user to enter the production rules
@@ -41,7 +42,8 @@ public class ProjectClient {
 			rhsFlag = false;
 			pointer = -1;
 			temp_prod = reader.readLine();
-			System.out.println("Production # " + (i+1) + ": " + temp_prod);
+			//System.out.println("Production # " + (i+1) + ": " + temp_prod);
+			System.out.println(temp_prod);
 			pointer = temp_prod.indexOf("->");
 			if(pointer != -1)
 			{
@@ -51,7 +53,7 @@ public class ProjectClient {
 				lhsFlag = checkLHS(lhs);
 				if(lhsFlag == false)
 				{
-					System.out.println("Grammar not in CNF\nExiting");
+					System.out.println("\nGrammar not in CNF\nLHS not valid\nExiting");
 					System.exit(0);
 				}
 				if(rhs.indexOf(",") == -1)
@@ -59,7 +61,7 @@ public class ProjectClient {
 					rhsFlag = checkRHS(rhs);
 					if(rhsFlag == false)
 					{
-						System.out.println("Grammar not in CNF\nExiting");
+						System.out.println("\nGrammar not in CNF\nRHS not valid\nExiting");
 						System.exit(0);
 					}
 				}
@@ -74,7 +76,7 @@ public class ProjectClient {
 							rhsFlag = checkRHS(newRHS[j]);
 							if(rhsFlag == false)
 							{
-								System.out.println("Grammar not in CNF\nExiting");
+								System.out.println("\nGrammar not in CNF\nRHS not valid\nExiting");
 								System.exit(0);
 							}
 						}
@@ -83,7 +85,7 @@ public class ProjectClient {
 			}
 			else if(pointer == -1)
 			{
-				System.out.println("Grammar not in CNF\nExiting");
+				System.out.println("\nGrammar not in CNF\nNo -> present\nExiting");
 				System.exit(0);
 			}
 			
@@ -99,7 +101,7 @@ public class ProjectClient {
 		
 			}
 		}
-		//System.out.println("Grammar: " + grammar);
+		System.out.println("\nGrammar: " + grammar);
 		
 		String[] checkString = str.split(" ");
 		int strLength = checkString.length;
@@ -137,7 +139,7 @@ public class ProjectClient {
 		/*
 		 * This section is used to display the matrix in the required format
 		 */
-		System.out.println("\nFinal Matrix: ");
+		System.out.println("\n\nFinal Matrix: ");
 		for(int i = 0; i < strLength; ++i)
 		{
 			for(int j = 0; j < strLength; ++j)

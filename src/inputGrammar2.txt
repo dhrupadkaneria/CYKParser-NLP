@@ -1,0 +1,17 @@
+14
+S
+the old dog the footsteps the young
+S->NP VP
+S->X VP
+X->Aux NP
+VP->Verb NP
+NP->Det Noun|Adj NP
+NP->Det Nominal
+Nominal->Noun PP
+Verb->ate|book|include|read
+Verb->sees|likes|dog|prefer
+Noun->John|book|flight|dog|footsteps
+Noun->boy|girl|meal|man|old|young|flight
+Det->that|this|a|the
+Adj->big|small|old|green|red
+Aux->does
