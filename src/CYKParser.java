@@ -7,7 +7,8 @@ import java.util.Set;
 public class CYKParser {
 
 	@SuppressWarnings({ "resource" })
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception 
+	{
 		// TODO Auto-generated method stub
 
 		String temp_prod = null;
@@ -19,7 +20,7 @@ public class CYKParser {
 		int pointer = -1;
 		String[][] matrix = null;
 		HashMap<String, String> grammar = new HashMap<String, String>();
-		FileInputStream fis = new FileInputStream("./src/inputGrammar.txt");
+		FileInputStream fis = new FileInputStream("./src/inputGrammar4.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
         int num_prod = Integer.parseInt(reader.readLine());
         System.out.println("Number of productions: " + num_prod);
@@ -297,9 +298,9 @@ public class CYKParser {
 		if((substring.length() == 1 && substring.charAt(0) >= 'a' && substring.charAt(0) <= 'z') ||
 				(substring.length() == 1 && substring.charAt(0) >= '0' && substring.charAt(0) <= '9'))
 			return true;
-		if(substring.length() == 2 && substring.charAt(0) >= 'A' && substring.charAt(0) <= 'Z' && 
+		/*if(substring.length() == 2 && substring.charAt(0) >= 'A' && substring.charAt(0) <= 'Z' && 
 				substring.charAt(1) >= 'A' && substring.charAt(1) <= 'Z')
-			return true;
+			return true;*/
 		if(substring.length() > 2)
 		{
 			int count = 0;

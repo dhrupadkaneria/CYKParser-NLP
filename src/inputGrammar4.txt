@@ -1,0 +1,16 @@
+13
+S
+she eats fish with a fork
+S->NP VP
+VP->VP PP
+VP->V NP
+VP->eats
+PP->P NP
+NP->Det N
+NP->N
+NP->she
+V->eats
+P->with
+N->fish
+N->fork
+Det->a
