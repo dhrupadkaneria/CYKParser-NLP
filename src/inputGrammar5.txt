@@ -1,0 +1,10 @@
+7
+S
+a b b
+S->A B
+A B->a
+A->S C
+B->b
+B->B B
+C->c
+C->C A
