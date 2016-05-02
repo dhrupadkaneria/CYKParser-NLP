@@ -10,7 +10,6 @@ public class CYKParser {
 	public static void main(String[] args) throws Exception 
 	{
 		// TODO Auto-generated method stub
-
 		String temp_prod = null;
 		String r = "";
 		String lhs = "";
@@ -20,7 +19,7 @@ public class CYKParser {
 		int pointer = -1;
 		String[][] matrix = null;
 		HashMap<String, String> grammar = new HashMap<String, String>();
-		FileInputStream fis = new FileInputStream("./src/inputGrammar5.txt");
+		FileInputStream fis = new FileInputStream("./src/inputGrammar2.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
         int num_prod = Integer.parseInt(reader.readLine());
         System.out.println("Number of productions: " + num_prod);
@@ -32,8 +31,8 @@ public class CYKParser {
 		System.out.println("\nProduction rules:");
 		
 		/*
-		 * In this loop, we ask the user to enter the production rules
-		 * 		- Once the rule is entered, we check if it is in CNF or no
+		 * In this loop, the production rules are fetched from a file
+		 * 		- Once the rule is fetched, we check if it is in CNF or no
 		 * 		- If the rule is in CNF, we proceed further and save it,
 		 * 		- If the rule is not in CNF, we terminate the execution
 		 */
@@ -43,7 +42,6 @@ public class CYKParser {
 			rhsFlag = false;
 			pointer = -1;
 			temp_prod = reader.readLine();
-			//System.out.println("Production # " + (i+1) + ": " + temp_prod);
 			System.out.println(temp_prod);
 			pointer = temp_prod.indexOf("->");
 			if(pointer != -1)
@@ -262,56 +260,42 @@ public class CYKParser {
 	
 	/*
 	 * To check if the LHS of the rule is in CNF or no
-	 * i.e if the length of LHS is 1, it should be a single character (non-terminal symbol)
-	 * if the length is other than length 1, it is not in CNF 
+	 * The condition is that there should not be any whitespace in the LHS
+	 * If a whitespace is present, the rule is not validated and the program is terminated
 	 */
 	private static boolean checkLHS(String substring) 
 	{
 		// TODO Auto-generated method stub
-		if(substring.length() == 1 && substring.charAt(0) >= 'A' && substring.charAt(0) <= 'Z')
-			return true;
-		if(substring.length() > 1)
+		int count = 0;
+		for(int i = 0; i < substring.length(); ++i)
 		{
-			int count = 0;
-			for(int i = 0; i < substring.length(); ++i)
-			{
-				if(substring.charAt(i) == ' ')
-					count++;
-			}
-			if(count < 1)
-				return true;
+			if(substring.charAt(i) == ' ')
+				count++;
 		}
-		return false;	
+		if(count == 0)
+			return true;
+	return false;	
 	}
 	
 	
 	
 	/*
 	 * To check if the RHS of the rule is in CNF or no
-	 * i.e if the length of the RHS is 1, it is a terminal symbol
-	 * if the length of the RHS is 2, it is two non-terminal symbol
-	 * if the length is other than 1 or 2, it is not in CNF 
+	 * The condition in RHS is that it should have only 1 whitespace
+	 * If there are more or lesser number of whitespace, then the RHS
+	 * 	is not validated and the program is terminated
 	 */
 	private static boolean checkRHS(String substring) 
 	{
 		// TODO Auto-generated method stub
-		if((substring.length() == 1 && substring.charAt(0) >= 'a' && substring.charAt(0) <= 'z') ||
-				(substring.length() == 1 && substring.charAt(0) >= '0' && substring.charAt(0) <= '9'))
-			return true;
-		/*if(substring.length() == 2 && substring.charAt(0) >= 'A' && substring.charAt(0) <= 'Z' && 
-				substring.charAt(1) >= 'A' && substring.charAt(1) <= 'Z')
-			return true;*/
-		if(substring.length() > 2)
+		int count = 0;
+		for(int i = 0; i < substring.length(); ++i)
 		{
-			int count = 0;
-			for(int i = 0; i < substring.length(); ++i)
-			{
-				if(substring.charAt(i) == ' ')
-					count++;
-			}
-			if(count <= 1)
-				return true;
+			if(substring.charAt(i) == ' ')
+				count++;
 		}
-		return false;
+		if(count == 1)
+			return true;
+	return false;
 	}
 }
