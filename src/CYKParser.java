@@ -19,7 +19,7 @@ public class CYKParser {
 		int pointer = -1;
 		String[][] matrix = null;
 		HashMap<String, String> grammar = new HashMap<String, String>();
-		FileInputStream fis = new FileInputStream("./src/inputGrammar4.txt");
+		FileInputStream fis = new FileInputStream("./src/inputGrammar3.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
         int num_prod = Integer.parseInt(reader.readLine());
         System.out.println("Number of productions: " + num_prod);
@@ -288,14 +288,27 @@ public class CYKParser {
 	private static boolean checkRHS(String substring) 
 	{
 		// TODO Auto-generated method stub
-		int count = 0;
-		for(int i = 0; i < substring.length(); ++i)
+		String[] splitStr = substring.split(" ");
+		if(splitStr.length > 2)
 		{
-			if(substring.charAt(i) == ' ')
-				count++;
+			return false;
 		}
-		if(count <= 1)
+		else
+		{
+			boolean firsthasLower = !splitStr[0].equals(splitStr[0].toUpperCase());
+			if(splitStr.length == 1 && !firsthasLower)
+			{
+				return false;
+			}
+			if(splitStr.length == 2)
+			{
+				if(!(splitStr[0].charAt(0) >= 'A' && splitStr[0].charAt(0) <= 'Z' && 
+						splitStr[1].charAt(0) >= 'A' && splitStr[1].charAt(0) <= 'Z'))
+				{
+					return false;
+				}
+			}
 			return true;
-	return false;
+		}
 	}
 }
