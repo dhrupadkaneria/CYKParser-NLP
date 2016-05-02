@@ -19,7 +19,7 @@ public class CYKParser {
 		int pointer = -1;
 		String[][] matrix = null;
 		HashMap<String, String> grammar = new HashMap<String, String>();
-		FileInputStream fis = new FileInputStream("./src/inputGrammar2.txt");
+		FileInputStream fis = new FileInputStream("./src/inputGrammar4.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
         int num_prod = Integer.parseInt(reader.readLine());
         System.out.println("Number of productions: " + num_prod);
@@ -281,7 +281,7 @@ public class CYKParser {
 	
 	/*
 	 * To check if the RHS of the rule is in CNF or no
-	 * The condition in RHS is that it should have only 1 whitespace
+	 * The condition in RHS is that it should have only or less than 1 whitespace
 	 * If there are more or lesser number of whitespace, then the RHS
 	 * 	is not validated and the program is terminated
 	 */
@@ -294,7 +294,7 @@ public class CYKParser {
 			if(substring.charAt(i) == ' ')
 				count++;
 		}
-		if(count == 1)
+		if(count <= 1)
 			return true;
 	return false;
 	}

@@ -1,10 +1,15 @@
-7
+11
 S
-a b b
-S->A B
-A B->a
-A->S C
-B->b
-B->B B
-C->c
-C->C A
+the old dog prefers the young
+S->NP VP
+S->X VP
+X->Aux NP
+NP->Det Nominal
+Nominal->Noun Nominal
+VP->Verb NP
+Noun->old|dog|foorsteps|young
+Nominal->old|dog|foorsteps|young
+Verb->dog|include|prefer|prefers
+Aux->does
+Det->that|this|a|the
+Adj->old|green|red

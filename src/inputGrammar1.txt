@@ -2,7 +2,7 @@
 S
 a b b
 S->A B
-A B->a
+A->a
 A->S C
 B->b
 B->B B
