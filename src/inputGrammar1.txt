@@ -3,7 +3,7 @@ S
 a b b
 S->A B
 A->a
-A->S C
+A->a C
 B->b
 B->B B
 C->c
